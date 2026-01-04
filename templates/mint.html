@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mint NFT Ticket – NFTix</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Mint Your NFT Ticket</h1>
+  <p>Choose your event and mint a unique NFT ticket.</p>
+</header>
+
+<div class="form-container">
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form action="/mint" method="post">
+    <label for="event">Select Event:</label>
+    <select id="event" name="event" required>
+      <option value="" disabled selected>Choose event</option>
+      <option value="concert">Concert</option>
+      <option value="conference">Conference</option>
+      <option value="sports">Sports</option>
+    </select>
+
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+    <button type="submit">Mint Ticket</button>
+  </form>
+</div>
+
+</body>
+</html>
+
+
+

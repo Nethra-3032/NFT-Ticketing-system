@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify NFT Ticket – NFTix</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Verify NFT Ticket</h1>
+  <p>Enter your NFT ticket ID to check authenticity.</p>
+</header>
+
+<div class="form-container">
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form action="/verify" method="post">
+    <label for="ticketId">NFT Ticket ID:</label>
+    <input type="text" id="ticketId" name="ticketId" placeholder="Enter your ticket ID" required>
+    <button type="submit">Verify</button>
+  </form>
+
+  {% if ticket_info %}
+    <h3>Your Ticket Info:</h3>
+    <p>Event: {{ ticket_info.event }}</p>
+    <p>Name: {{ ticket_info.name }}</p>
+    <p>QR Code:</p>
+    <img src="{{ url_for('ticket_qr', ticket_id=ticket_id) }}" alt="QR Code">
+  {% endif %}
+</div>
+
+</body>
+</html>
+
+
